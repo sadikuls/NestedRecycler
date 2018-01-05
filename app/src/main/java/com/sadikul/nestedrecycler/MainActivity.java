@@ -67,10 +67,10 @@ public class MainActivity extends AppCompatActivity {
             Log.d("innerItems"," c " +innerCount);
             innerRecyclerItems.clear();
 
-            while(innerCount >0){
+            for (int j=0;j<innerCount ; j++){
 
-                innerRecyclerItems.add(new InnerRecyclerItem("innerItem "+ innerCount));
-                innerCount -- ;
+
+                innerRecyclerItems.add(new InnerRecyclerItem("innerItem "+ j));
             }
 
             recyclerViewItems.add(new RecyclerViewItem("item "+ i,innerRecyclerItems));

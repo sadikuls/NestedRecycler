@@ -1,6 +1,7 @@
 package com.sadikul.nestedrecycler.Adapter;
 
 import android.content.Context;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -47,11 +48,15 @@ public class AdapterMainRecycler extends RecyclerView.Adapter<AdapterMainRecycle
         List<InnerRecyclerItem> innerRecyclerItem = item.getInnerRecyclerItem();
         holder.nameTextview.setText(item.getName());
 
-        //Log.e("innerInAdapter","innerItem "+innerRecyclerItem.size());
-
         for(int i = 0 ; i<innerRecyclerItem.size();i++){
             Log.e("innerInAdapter",item.getName()+" "+ innerRecyclerItem.size()+" "+ i);
         }
+
+
+        holder.innerAdapter.setData(item.getInnerRecyclerItem()); // List of Strings
+        holder.innerAdapter.setRowIndex(position);
+
+
     }
 
     @Override
@@ -63,10 +68,15 @@ public class AdapterMainRecycler extends RecyclerView.Adapter<AdapterMainRecycle
 
         TextView nameTextview;
         RecyclerView innerRecyclerView;
+        InnerRecyclerviewAdapter innerAdapter;
         public viewHolder(View itemView) {
             super(itemView);
             nameTextview = itemView.findViewById(R.id.item_name_textview);
             innerRecyclerView = itemView.findViewById(R.id.innerRecyclerView);
+            innerRecyclerView.setLayoutManager(new LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false));
+
+            innerAdapter = new InnerRecyclerviewAdapter();
+            innerRecyclerView.setAdapter(innerAdapter);
         }
     }
 }
